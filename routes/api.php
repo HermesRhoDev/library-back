@@ -23,4 +23,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //************************** */ COLLECTION PART \* ******************************** \\
     Route::get('collections/{id}', [CollectionController::class, 'index'])->name('index');
     Route::get('collection/{id}', [CollectionController::class, 'show'])->name('show');
+    Route::post('collection/store', [CollectionController::class, 'store'])->name('store');
 });
