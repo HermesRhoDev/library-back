@@ -36,7 +36,7 @@ class CollectionController extends Controller
         $collection = new Collection();
 
         $collection->name = $request->name;
-        $collection->user_id = $request->user_id;
+        $collection->user_id = auth()->id();
 
         $collection->save();
 

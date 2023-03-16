@@ -15,7 +15,6 @@ class CollectionRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'user_id' => 'required|string',
             'book_id' => 'nullable|exists:books,id',
         ];
     }
