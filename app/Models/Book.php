@@ -22,15 +22,11 @@ class Book extends Model
     protected $fillable = [
         'id',
         'title',
-        'pages_count',
+        'pageCount',
         'authors',
         'categories',
         'cover_link',
         'summary',
-    ];
-
-    protected $hidden = [
-        'id',
     ];
 
     public function collections(){ return $this->belongsToMany(Collection::class, 'book_collection'); }

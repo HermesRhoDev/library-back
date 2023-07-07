@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::table('commentaries', function (Blueprint $table) {
             $table->string('user_id')->nullable(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('book_id')->nullable(false);
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
         });
     }
 
@@ -25,8 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('commentaries', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-            $table->dropColumn('book_id');
+
         });
     }
 };
