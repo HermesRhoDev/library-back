@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CollectionBookController;
 use App\Http\Controllers\CollectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    //************************** */ COLLECTION PART \* ******************************** \\
-    Route::get('collections/{id}', [CollectionController::class, 'index'])->name('index');
+    Route::get('mycollections', [CollectionController::class, 'index'])->name('index');
     Route::get('collection/{id}', [CollectionController::class, 'show'])->name('show');
     Route::post('collection/store', [CollectionController::class, 'store'])->name('store');
+    Route::delete('destroy-collection/{id}', [CollectionController::class, 'destroy'])->name('destroy');
+
+    Route::post('collection/{collectionId}/add-book', [CollectionBookController::class, 'addBookToCollection'])->name('add-book');
+    Route::delete('collection/{collectionId}/remove-book/{bookId}', [CollectionBookController::class, 'removeBook'])->name('remove-book');
 });

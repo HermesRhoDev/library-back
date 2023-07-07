@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('collections', function (Blueprint $table) {
-            $table->string('user_id')->nullable(false);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('books', function (Blueprint $table) {
+            $table->renameColumn('pages_count', 'pageCount');
         });
     }
 
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('collections', function (Blueprint $table) {
-
+        Schema::table('books', function (Blueprint $table) {
+            $table->renameColumn('pageCount', 'pages_count');
         });
     }
 };

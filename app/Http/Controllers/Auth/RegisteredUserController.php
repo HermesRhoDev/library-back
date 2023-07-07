@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Models\Collection;
 
 class RegisteredUserController extends Controller
 {
@@ -38,9 +39,15 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Créer la collection par défaut "Favoris"
+        $collection = new Collection();
+        $collection->name = 'Favoris';
+        $collection->user_id = $user->id;
+        $collection->save();
+
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return response()->json(auth()->user());
     }
