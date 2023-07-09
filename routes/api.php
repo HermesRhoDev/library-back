@@ -28,4 +28,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('collection/{collectionId}/add-book', [CollectionBookController::class, 'addBookToCollection'])->name('add-book');
     Route::delete('collection/{collectionId}/remove-book/{bookId}', [CollectionBookController::class, 'removeBook'])->name('remove-book');
+
+    Route::get('public-collections', [CollectionBookController::class, 'getPublicCollections']);
+    Route::put('collection/{collectionId}/set-public', [CollectionBookController::class, 'setCollectionAsPublic']);
+    Route::put('collection/{collectionId}/set-private', [CollectionBookController::class, 'setCollectionAsPrivate']);
 });

@@ -16,7 +16,7 @@ class Collection extends Model
     ];
 
     protected $hidden = [
-        'user_id',
+        
     ];
 
     public function books(){ return $this->belongsToMany(Book::class, 'book_collection'); }
