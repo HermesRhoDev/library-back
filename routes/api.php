@@ -4,6 +4,7 @@ use App\Http\Controllers\CollectionBookController;
 use App\Http\Controllers\CollectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('public-collections', [CollectionBookController::class, 'getPublicCollections']);
     Route::put('collection/{collectionId}/set-public', [CollectionBookController::class, 'setCollectionAsPublic']);
     Route::put('collection/{collectionId}/set-private', [CollectionBookController::class, 'setCollectionAsPrivate']);
+
+    Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });
