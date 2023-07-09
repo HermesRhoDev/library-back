@@ -52,12 +52,13 @@ class CollectionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(string $id)
     {
-        $collection = Collection::query()
-        ->with('books')
-        ->where('id', $request->id)
-        ->firstOrFail();
+        $collection = Collection::with('books')
+            ->leftJoin('book_collection', 'collections.id', '=', 'book_collection.collection_id')
+            ->where('collections.id', $id)
+            ->select('collections.*', 'book_collection.book_id')
+            ->firstOrFail();
 
         return response()->json($collection);
     }

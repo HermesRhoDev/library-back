@@ -56,6 +56,42 @@ class CollectionBookController extends Controller
 
         $collection->books()->detach($bookId);
 
-        return response()->json(['message' => 'Livre supprimé de la collection avec succès.']);
+        return response()->json(['message' => 'Livre supprimé de la collection avec succès.'], 200);
+    }
+
+    /**
+     * Get all public collections.
+     */
+    public function getPublicCollections()
+    {
+        $collections = Collection::where('isPublic', 1)->get();
+
+        return response()->json(['collections' => $collections], 200);
+    }
+
+    /**
+     * Set a collection as public.
+     */
+    public function setCollectionAsPublic(string $collectionId)
+    {
+        $collection = Collection::findOrFail($collectionId);
+
+        $collection->isPublic = true;
+        $collection->save();
+
+        return response()->json(['message' => 'Collection rendue publique avec succès.'], 200);
+    }
+
+    /**
+     * Set a collection as private.
+     */
+    public function setCollectionAsPrivate(string $collectionId)
+    {
+        $collection = Collection::findOrFail($collectionId);
+
+        $collection->isPublic = false;
+        $collection->save();
+
+        return response()->json(['message' => 'Collection rendue privée avec succès.'], 200);
     }
 }
